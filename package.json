@@ -1,0 +1,24 @@
+{
+  "name": "discordbot",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^1.1.0",
+    "@discordjs/voice": "^0.11.0",
+    "chalk": "^4.1.2",
+    "discord-api-types": "^0.37.7",
+    "discord-rpc": "^4.0.1",
+    "discord.js": "^14.3.0",
+    "dotenv": "^16.0.2",
+    "opusscript": "^0.0.8",
+    "ytdl-core": "^4.11.2"
+  }
+}

@@ -2,10 +2,16 @@ require("dotenv").config();
 const { token } = process.env;
 const { Client, Collection } = require("discord.js");
 const fs = require("fs");
+const { Player } = require("discord-player");
 
 const client = new Client({ intents: 32767 });
 
-// client.on("ready", () => {});
+client.player = new Player(client, {
+  ytdlOptions: {
+    quality: "highestaudio",
+    highWaterMark: 1 << 25,
+  },
+});
 
 client.commands = new Collection();
 client.commandArray = [];

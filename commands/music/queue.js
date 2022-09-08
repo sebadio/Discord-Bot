@@ -52,7 +52,7 @@ module.exports = {
               : "There is nothing playing"
           )
           .setFooter({
-            text: `Page **${page + 1}** out of: **${totalPages}**`,
+            text: `Page ${page + 1} out of: ${totalPages}`,
           })
           .setThumbnail(currentSong.thumbnail)
           .setColor([146, 217, 225]),

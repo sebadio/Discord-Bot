@@ -9,7 +9,7 @@ module.exports = {
     const vc = getVoiceConnection(guildId);
     const queue = client.player.getQueue(interaction.guildId);
 
-    queue.destroy();
+    queue && queue.destroy();
     vc.destroy();
 
     interaction.reply("Fucking finally im free");

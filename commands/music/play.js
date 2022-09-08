@@ -89,10 +89,14 @@ module.exports = {
         await queue.addTracks(result.tracks);
 
         embed.setTitle(
-          `Succesfully added **${playlist.title}** (${result.tracks.length} tracks) to the queue`
+          `Succesfully added **${
+            playlist.title ? playlist.title : "Your playlist"
+          }** (${result.tracks.length} tracks) to the queue`
         );
         embed.setDescription(
-          `Added **${playlist.title}** to the Queue\n${playlist.url} `
+          `Added **${
+            playlist.title ? playlist.title : "Your playlist"
+          }** to the Queue\n${playlist.url} `
         );
         embed.setThumbnail(playlist.thumbnail.url);
       } else if (songType === "song") {

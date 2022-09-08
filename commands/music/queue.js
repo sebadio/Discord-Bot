@@ -39,11 +39,9 @@ module.exports = {
           song.duration
         }]\` - <@${song.requestedBy.id}>`;
       })
-      .join("\n");
+      .join("\n\n");
 
     const currentSong = queue.previousTracks[0];
-
-    console.log(queue);
 
     await interaction.reply({
       embeds: [
@@ -58,7 +56,7 @@ module.exports = {
             text: `Page ${page + 1} out of ${totalPages}`,
           })
           .setThumbnail(currentSong.thumbnail)
-          .setColor([120, 135, 176]),
+          .setColor([146, 217, 225]),
       ],
     });
   },

@@ -7,6 +7,7 @@ module.exports = {
     const guildId = interaction.member.guild.id;
 
     const vc = getVoiceConnection(guildId);
+    const queue = client.player.getQueue(interaction.guildId);
 
     queue.destroy();
     vc.destroy();

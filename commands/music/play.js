@@ -30,8 +30,6 @@ module.exports = {
         ],
       });
     } else {
-      console.log(song);
-
       const queue = await client.player.createQueue(interaction.guild);
       if (!queue.connection) {
         await queue.connect(interaction.member.voice.channel);
@@ -49,13 +47,10 @@ module.exports = {
         ) {
           songType = "playlist";
         } else {
-          songType = "url";
         }
       } else {
-        inputType = "song";
+        songType = "song";
       }
-
-      console.log(songType);
 
       if (songType === "url") {
         const result = await client.player.search(song, {
@@ -64,10 +59,9 @@ module.exports = {
         });
 
         if (result.tracks.length === 0) {
-          title = "You fucking monkey";
-          description = "There was no result for that request you made";
-          footer = "for fuck's sake";
-          return;
+          embed.setTitle("You fucking monkey");
+          embed.setDescription("There was no result for that request you made");
+          embed.setFooter({ text: "for fuck's sake" });
         }
 
         const music = result.tracks[0];
@@ -82,13 +76,13 @@ module.exports = {
       } else if (songType === "playlist") {
         const result = await client.player.search(song, {
           requestedBy: interaction.user,
-          searchEngine: QueryType.AUTO,
+          searchEngine: QueryType.YOUTUBE_PLAYLIST,
         });
 
         if (result.tracks.length === 0) {
           embed.setTitle("You fucking monkey");
           embed.setDescription("There was no result for that request you made");
-          embed.setFooter("for fuck's sake");
+          embed.setFooter({ text: "for fuck's sake" });
         }
 
         const playlist = result.playlist;
@@ -100,19 +94,17 @@ module.exports = {
         embed.setDescription(
           `Added **${playlist.title}** to the Queue\n${playlist.url} `
         );
-        embed.setThumbnail(playlist.thumbnail);
-        embed.setFooter({ text: `${playlist.duration}` });
+        embed.setThumbnail(playlist.thumbnail.url);
       } else if (songType === "song") {
         const result = await client.player.search(song, {
           requestedBy: interaction.user,
-          searchEngine: QueryType.YOUTUBE_VIDEO,
+          searchEngine: QueryType.YOUTUBE_SEARCH,
         });
 
         if (result.tracks.length === 0) {
-          title = "You fucking monkey";
-          description = "There was no result for that request you made";
-          footer = "for fuck's sake";
-          return;
+          embed.setTitle("You fucking monkey");
+          embed.setDescription("There was no result for that request you made");
+          embed.setFooter({ text: "for fuck's sake" });
         }
 
         const music = result.tracks[0];
@@ -123,11 +115,12 @@ module.exports = {
           `Added **${music.title}** to the Queue\n${music.url} `
         );
         embed.setThumbnail(music.thumbnail);
-        embed.setFooter({ text: `${song.duration}` });
+        embed.setFooter({ text: `${music.duration}` });
       }
 
       if (!queue.playing) await queue.play();
 
+      embed.setColor([146, 217, 225]);
       return interaction.reply({ embeds: [embed] });
     }
   },

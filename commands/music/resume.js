@@ -8,9 +8,9 @@ module.exports = {
     const queue = client.player.getQueue(interaction.guildId);
 
     if (!queue)
-      return await interaction.reply("There is nothing to pause you dickhead");
+      return await interaction.reply("There is nothing to resume you dickhead");
 
-    if (queue.playing) {
+    if (!queue.connection.paused) {
       return await interaction.reply("Time is already flowing normally");
     }
 

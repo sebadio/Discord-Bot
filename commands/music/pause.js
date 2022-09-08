@@ -10,7 +10,7 @@ module.exports = {
     if (!queue)
       return await interaction.reply("There is nothing to pause you dickhead");
 
-    if (!queue.playing) {
+    if (queue.connection.paused) {
       return await interaction.reply("Time is already stopped");
     }
 

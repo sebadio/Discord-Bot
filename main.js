@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { token } = process.env;
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, TextChannel } = require("discord.js");
 const fs = require("fs");
 const { Player } = require("discord-player");
 
@@ -38,3 +38,29 @@ client.handleCommands();
   message.channel.send("Sexo");
 });
  */
+
+client.on("messageCreate", async (message) => {
+  if (message.author.bot) {
+    return;
+  }
+
+  const msg = await message.fetch();
+
+  const { content } = await msg;
+
+  if (content.toLowerCase().trim() === "buen bot") {
+    message.channel.send("gracias pibe, toma un emoji");
+
+    setTimeout(() => {
+      message.react("❤");
+    }, 1000);
+  }
+
+  if (content.toLowerCase().trim() === "bot malo") {
+    message.channel.send("te limaste flaco, muy hater");
+
+    setTimeout(() => {
+      message.react("💢");
+    }, 1000);
+  }
+});

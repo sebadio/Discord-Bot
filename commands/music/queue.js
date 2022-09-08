@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { getVoiceConnections, getVoiceConnection } = require("@discordjs/voice");
 const { QueryType } = require("discord-player");
-const { execute } = require("./play");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -41,7 +40,7 @@ module.exports = {
       })
       .join("\n\n");
 
-    const currentSong = queue.previousTracks[0];
+    const currentSong = queue.previousTracks[queue.previousTracks.length - 1];
 
     await interaction.reply({
       embeds: [
@@ -53,7 +52,7 @@ module.exports = {
               : "There is nothing playing"
           )
           .setFooter({
-            text: `Page ${page + 1} out of ${totalPages}`,
+            text: `Page **${page + 1}** out of: **${totalPages}**`,
           })
           .setThumbnail(currentSong.thumbnail)
           .setColor([146, 217, 225]),
